@@ -1,0 +1,13 @@
+.booklistBody {
+    padding: 1em;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.booklistBody h2 {
+  margin-bottom: 1em;
+}
+
+.margin-right-1em {
+  margin-right: 1em;
+}
