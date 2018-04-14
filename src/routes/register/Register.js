@@ -47,15 +47,15 @@ class Register extends Component {
       <div>
         <h2>Nýskráning</h2>
         <form>
-          <div>
+          <div className="input-block">
             <label>Notendanafn:</label>
             <input type="text" onChange={this.updateUsername.bind(this)}/>
           </div>
-          <div>
+          <div className="input-block">
             <label>Lykilorð:</label>
             <input id="password" type="password" onChange={this.updatePassword.bind(this)}/>
           </div>
-          <div>
+          <div className="input-block">
             <label>Nafn:</label>
             <input id="name" type="text" onChange={this.updateName.bind(this)}/>
           </div>

@@ -23,9 +23,11 @@ export default class Button extends Component {
     const classes = `button ${className}`
 
     return (
-      <button onClick={onClick} className={classes}>{children}</button>
+      <div className="search">
+        <input type="text" placeholder="Bókaleit"/>
+        <button onClick={onClick} className={classes}>{children}</button>
+      </div>
     );
   }
 
 }
-

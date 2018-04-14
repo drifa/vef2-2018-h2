@@ -1,34 +1,38 @@
 .header {
   background-color: #dcbe87;
-
 }
 
-.header h1 {
-  float: left;
-  width: 33%;
+.header ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header li {
   display: inline-block;
-  padding: 5px;
+  margin: 15px 10px 15px 10px;
 }
 
-.search-div {
-  width: 33%;
-  display: inline-block;
-
+.heading-nav {
+  padding-left: 10px;
 }
 
-.search-div div {
-  margin: 0 auto;
-  padding: 5px;
+.login-nav {
+  padding-right: 10px;
 }
 
-.login {
-  margin-top: 0;
-  float: right;
-  width: 33%;
-  display: inline-block;
+.home-link {
+  text-decoration: none;
 }
 
-.login div{
-  float: right;
-  padding: 5px;
+
+
+
+
+
+@media only screen and (max-width: 585px) {
+    .search-nav div{
+        display: none;
+    }
 }
