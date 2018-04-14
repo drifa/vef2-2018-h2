@@ -80,6 +80,9 @@ class Register extends Component {
         <div>
           <h2>Nýskráning</h2>
         </div>
+        <div className="signup-errors">
+          {this.state.errors ? this.state.errors : <Redirect to="/login" push />}
+        </div>
         <table className="table-signup">
           <tbody>
             <tr>
@@ -96,9 +99,6 @@ class Register extends Component {
             </tr>
           </tbody>
         </table>
-        <div className="signup-errors">
-          {this.state.errors ? this.state.errors : <Redirect to="/login" push />}
-        </div>
         <div>
           <Button children={(<span>Nýskrá</span>)} onClick={this.registerPressed.bind(this)}/>
         </div>

@@ -14,7 +14,7 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      errors: [],
+      error: '',
     }
   }
 
@@ -32,13 +32,20 @@ class Login extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      let errors = [];
-      let token = null;
-      if (data.errors) {
-        errors = data.errors;
+      console.log(JSON.stringify(data));
+      let error = '';
+      let auth = null;
+
+      if (data.error) {
+        error = data.error;
       } else {
-        token = data.token;
+        auth = data;
       }
+      let newState = Object.assign({}, this.state);
+      newState.error = error;
+      newState.auth = auth;
+
+      this.setState(newState)
     });
   }
 
@@ -56,26 +63,11 @@ class Login extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <div>
-        <h2>Innskráning</h2>
-        <form>
-          <div className="input-block">
-            <label>Notendanafn:</label>
-            <input type="text" onChange={this.updateUsername.bind(this)}/>
-          </div>
-          <div className="input-block">
-            <label>Lykilorð:</label>
-            <input id="password" type="password" onChange={this.updatePassword.bind(this)}/>
-          </div>
-        </form>
-        <Button children={(<span>Innskrá</span>)} onClick={this.loginPressed.bind(this)}/>
-        <Link to="/register">Nýskráning</Link>
-=======
       <div className="login">
         <div>
-          <h2>Innskráning</h2>
+          <h2 className="title">Innskráning</h2>
         </div>
+        <p className="error">{this.state.error}</p>
         <table className="table-login">
           <tbody>
             <tr>
@@ -94,7 +86,6 @@ class Login extends Component {
         <div>
           <Link to="/register">Nýskráning</Link>
         </div>
->>>>>>> aa07e12328c9f883d521dc75e8417deb2dbad2cc
       </div>
     );
   }
