@@ -76,25 +76,35 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Nýskráning</h2>
-        <form>
-          <div className="input-block">
-            <label>Notendanafn:</label>
-            <input type="text" onChange={this.updateUsername.bind(this)}/>
-          </div>
-          <div className="input-block">
-            <label>Lykilorð:</label>
-            <input id="password" type="password" onChange={this.updatePassword.bind(this)}/>
-          </div>
-          <div className="input-block">
-            <label>Nafn:</label>
-            <input id="name" type="text" onChange={this.updateName.bind(this)}/>
-          </div>
-        </form>
-        {this.state.errors ? this.state.errors : <Redirect to="/login" push />}
-        <Button children={(<span>Nýskrá</span>)} onClick={this.registerPressed.bind(this)}/>
-        <Link to="/login">Innskráning</Link>
+      <div className="signup">
+        <div>
+          <h2>Nýskráning</h2>
+        </div>
+        <table className="table-signup">
+          <tbody>
+            <tr>
+              <td><label>Notendanafn:</label></td>
+              <td className="table-input"><input type="text" onChange={this.updateUsername.bind(this)}/></td>
+            </tr>
+            <tr className="input-block">
+              <td><label>Lykilorð:</label></td>
+              <td className="table-input"><input id="password" type="password" onChange={this.updatePassword.bind(this)}/></td>
+            </tr>
+            <tr>
+              <td><label>Nafn:</label></td>
+              <td className="table-input"><input id="name" type="text" onChange={this.updateName.bind(this)}/></td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="signup-errors">
+          {this.state.errors ? this.state.errors : <Redirect to="/login" push />}
+        </div>
+        <div>
+          <Button children={(<span>Nýskrá</span>)} onClick={this.registerPressed.bind(this)}/>
+        </div>
+        <div>
+          <Link to="/login">Innskráning</Link>
+        </div>
       </div>
     );
   }

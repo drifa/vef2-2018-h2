@@ -1,5 +1,5 @@
 .login {
-  margin: 3% 15% 0 15%;
+  margin: 3% 0 0 15%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -23,4 +23,17 @@
   width: 100%;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+
+
+
+@media only screen and (max-width: 800px) {
+    .table-login {
+      width: 100%;
+    }
+
+    .login {
+      margin: 3% 15% 0 15%;
+    }
 }

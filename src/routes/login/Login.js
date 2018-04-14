@@ -41,14 +41,16 @@ class Login extends Component {
           <h2>Innskráning</h2>
         </div>
         <table className="table-login">
-          <tr>
-            <td><label>Notendanafn:</label></td>
-            <td className="table-input"><input type="text" onChange={this.updateUsername.bind(this)}/></td>
-          </tr>
-          <tr>
-            <td><label>Lykilorð:</label></td>
-            <td className="table-input"><input id="password" type="password" onChange={this.updatePassword.bind(this)}/></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><label>Notendanafn:</label></td>
+              <td className="table-input"><input type="text" onChange={this.updateUsername.bind(this)}/></td>
+            </tr>
+            <tr>
+              <td><label>Lykilorð:</label></td>
+              <td className="table-input"><input id="password" type="password" onChange={this.updatePassword.bind(this)}/></td>
+            </tr>
+          </tbody>
         </table>
         <div>
           <Button children={(<span>Innskrá</span>)} onClick={this.loginPressed.bind(this)}/>
