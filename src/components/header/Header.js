@@ -19,9 +19,18 @@ class Header extends Component {
         <h1 className="header__heading"><Link to="/">Bókasafnið</Link></h1>
 
         {/* ætti samt frekar heima í sér component */}
-        <Button onClick={this.onClick}>Leita</Button>
+        <div className="search-div">
+          <div>
+            <input type="text" placeholder="Bókaleit"/>
+            <Button onClick={this.onClick}>Leita</Button>
+          </div>
+        </div>
 
-        <Link to="/login">Innskráning</Link>
+        <div className="login">
+          <div>
+            <Link to="/login" className="Login-nav">Innskráning</Link>
+          </div>
+        </div>
       </header>
     );
   }
