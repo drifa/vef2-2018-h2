@@ -56,6 +56,7 @@ class Login extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
         <h2>Innskráning</h2>
         <form>
@@ -70,6 +71,30 @@ class Login extends Component {
         </form>
         <Button children={(<span>Innskrá</span>)} onClick={this.loginPressed.bind(this)}/>
         <Link to="/register">Nýskráning</Link>
+=======
+      <div className="login">
+        <div>
+          <h2>Innskráning</h2>
+        </div>
+        <table className="table-login">
+          <tbody>
+            <tr>
+              <td><label>Notendanafn:</label></td>
+              <td className="table-input"><input type="text" onChange={this.updateUsername.bind(this)}/></td>
+            </tr>
+            <tr>
+              <td><label>Lykilorð:</label></td>
+              <td className="table-input"><input id="password" type="password" onChange={this.updatePassword.bind(this)}/></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <Button children={(<span>Innskrá</span>)} onClick={this.loginPressed.bind(this)}/>
+        </div>
+        <div>
+          <Link to="/register">Nýskráning</Link>
+        </div>
+>>>>>>> aa07e12328c9f883d521dc75e8417deb2dbad2cc
       </div>
     );
   }

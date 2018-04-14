@@ -3,13 +3,27 @@ import { Link } from 'react-router-dom';
 
 class Home extends Component {
 
+
+
   render() {
-
+    const isLoggedIn = true;
     /* todo birta mismunandi upplýsingar ef innskráður notandi eða ekki */
+    const loggedInDiv = (
+      <div className="home-logedIn">
 
+      </div>
+    );
+
+    const loggedOutDiv = (
+      <div className="home">
+        
+      </div>
+    );
     return (
       <div>
-        <p>Halló heimur!</p>
+        <h1>Velkominn á bókasafnið</h1>
+        {isLoggedIn ? loggedInDiv : loggedOutDiv}
+
         <p><Link to="/login">Innskráning</Link></p>
       </div>
     );
