@@ -9,9 +9,66 @@ import Button from '../../components/button';
 
 export default class Book extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      book: {},
+      isHidden: true,
+    }
+  }
+
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_SERVICE_URL}books/${this.props.match.params.id}`)
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          book: data,
+        });
+      });
+  }
+
+  onClickSave = (e) => {
+
+  }
+
+  toggleRating() {
+    this.setState({
+      isHidden: !this.state.isHidden
+    });
+  }
+
   render() {
+
+    let hidden = {
+      display: this.state.isHidden ? "none" : "block"
+    };
+
     return (
 
+      <div>
+        <h2>{this.state.book.title}</h2>
+        <p>Eftir {this.state.book.author}</p>
+        <p>ISBN13: {this.state.book.isbn13}</p>
+        <p>{this.state.book.categorytitle}</p>
+        <p>{this.state.book.description}</p>
+        <p>{this.state.book.pagecount} síður</p>
+        <p>Gefin út {this.state.book.published}</p>
+        <p>Tungumál: {this.state.book.language}</p>
+        <Link to={this.onClick}>Breyta bók</Link>
+
+        <div className="rate-book" style={ hidden }>
+          <label>Um bók</label>
+          <input type="textarea"></input>
+          <input type="number" placeholder="1"></input>
+          <div>
+            <Button >Vista</Button>
+            <Button >Hætta við</Button>
+          </div>
+        </div>
+
+        <Button onClick={this.toggleRating.bind(this)}>Skrá Lestur</Button>
+        <Button >Til baka</Button>
+      </div>
     )
   }
 }
