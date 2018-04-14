@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router'
 import { connect } from 'react-redux';
 import Button from '../../components/button'
 
@@ -15,6 +16,7 @@ class Register extends Component {
       username: '',
       password: '',
       name: '',
+      errors: [],
     }
   }
 
@@ -22,6 +24,36 @@ class Register extends Component {
     console.log(this.state.username);
     console.log(this.state.password);
     console.log(this.state.name);
+
+    fetch(`${process.env.REACT_APP_SERVICE_URL}register`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+        name: this.state.name,
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      let errors = []
+      if (data.errors) {
+        console.log("UH OH!");
+        errors = data.errors.map(error => {
+          return (
+            <p className="error">{error.message}</p>
+          )
+        });
+      }
+
+      let newState = Object.assign({}, this.state);
+      newState.errors = errors;
+      this.setState(newState);
+
+    });
   }
 
   updateUsername(evt) {
@@ -60,6 +92,7 @@ class Register extends Component {
             <input id="name" type="text" onChange={this.updateName.bind(this)}/>
           </div>
         </form>
+        {this.state.errors ? this.state.errors : <Redirect to="/login" push />}
         <Button children={(<span>Nýskrá</span>)} onClick={this.registerPressed.bind(this)}/>
         <Link to="/login">Innskráning</Link>
       </div>
