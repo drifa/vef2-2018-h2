@@ -14,12 +14,32 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      errors: [],
     }
   }
 
   loginPressed() {
-    console.log(this.state.username);
-    console.log(this.state.password);
+    fetch(`${process.env.REACT_APP_SERVICE_URL}login`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      let errors = [];
+      let token = null;
+      if (data.errors) {
+        errors = data.errors;
+      } else {
+        token = data.token;
+      }
+    });
   }
 
   updateUsername(evt) {
@@ -36,26 +56,20 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login">
-        <div>
-          <h2>Innskráning</h2>
-        </div>
-        <table className="table-login">
-          <tr>
-            <td><label>Notendanafn:</label></td>
-            <td className="table-input"><input type="text" onChange={this.updateUsername.bind(this)}/></td>
-          </tr>
-          <tr>
-            <td><label>Lykilorð:</label></td>
-            <td className="table-input"><input id="password" type="password" onChange={this.updatePassword.bind(this)}/></td>
-          </tr>
-        </table>
-        <div>
-          <Button children={(<span>Innskrá</span>)} onClick={this.loginPressed.bind(this)}/>
-        </div>
-        <div>
-          <Link to="/register">Nýskráning</Link>
-        </div>
+      <div>
+        <h2>Innskráning</h2>
+        <form>
+          <div className="input-block">
+            <label>Notendanafn:</label>
+            <input type="text" onChange={this.updateUsername.bind(this)}/>
+          </div>
+          <div className="input-block">
+            <label>Lykilorð:</label>
+            <input id="password" type="password" onChange={this.updatePassword.bind(this)}/>
+          </div>
+        </form>
+        <Button children={(<span>Innskrá</span>)} onClick={this.loginPressed.bind(this)}/>
+        <Link to="/register">Nýskráning</Link>
       </div>
     );
   }
