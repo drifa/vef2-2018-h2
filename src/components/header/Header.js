@@ -16,21 +16,17 @@ class Header extends Component {
   render() {
     return (
       <header className="header">
-        <h1 className="header__heading"><Link to="/">Bókasafnið</Link></h1>
-
-        {/* ætti samt frekar heima í sér component */}
-        <div className="search-div">
-          <div>
-            <input type="text" placeholder="Bókaleit"/>
+        <ul>
+          <li className="heading-nav">
+            <h1 className="header__heading"><Link to="/" className="home-link">Bókasafnið</Link></h1>
+          </li>
+          <li className="search-nav">
             <Button onClick={this.onClick}>Leita</Button>
-          </div>
-        </div>
-
-        <div className="login">
-          <div>
-            <Link to="/login" className="Login-nav">Innskráning</Link>
-          </div>
-        </div>
+          </li>
+          <li className="login-nav">
+            <Link to="/login">Innskráning</Link>
+          </li>
+        </ul>
       </header>
     );
   }
