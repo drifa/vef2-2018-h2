@@ -14,12 +14,39 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      error: '',
     }
   }
 
   loginPressed() {
-    console.log(this.state.username);
-    console.log(this.state.password);
+    fetch(`${process.env.REACT_APP_SERVICE_URL}login`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(JSON.stringify(data));
+      let error = '';
+      let auth = null;
+
+      if (data.error) {
+        error = data.error;
+      } else {
+        auth = data;
+      }
+      let newState = Object.assign({}, this.state);
+      newState.error = error;
+      newState.auth = auth;
+
+      this.setState(newState)
+    });
   }
 
   updateUsername(evt) {
@@ -38,8 +65,9 @@ class Login extends Component {
     return (
       <div className="login">
         <div>
-          <h2>Innskráning</h2>
+          <h2 className="title">Innskráning</h2>
         </div>
+        <p className="error">{this.state.error}</p>
         <table className="table-login">
           <tbody>
             <tr>
