@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Helmet from 'react-helmet';
 
 import './BookList.css';
 import BookListItem from '../../components/bookListItem';
@@ -58,6 +59,7 @@ export default class BookList extends Component {
     const showPrev = page > 1
     return (
       <div className="booklistBody">
+        <Helmet defaultTitle="Bækur" titleTemplate="%s – Bókasafnið" />
         <h2>Bækur</h2>
         <ul>
           {this.state.children}
