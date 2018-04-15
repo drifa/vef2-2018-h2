@@ -9,11 +9,15 @@ import rootReducer from './reducers'
 import App from './App';
 import './index.css';
 
+import { requestLogin } from './actions/auth';
+
 /* verkefni sett upp til að styðja async actions í redux */
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
+
+store.dispatch(requestLogin({}))
 
 ReactDOM.render(
   <Provider store={store}>

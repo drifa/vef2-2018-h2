@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 
 import Button from '../button';
 
+import { requestLogout } from '../../actions/auth';
+
 import './Header.css';
 
 class Header extends Component {
@@ -13,7 +15,26 @@ class Header extends Component {
     console.log('leita');
   }
 
+  onUpdateAuth() {
+    this.props.onUpdateAuth({});
+  }
+
   render() {
+
+    let authDiv = (
+      <li className="login-nav">
+        <Link to="/login">Innskráning</Link>
+      </li>
+    );
+    if (this.props.auth.user) {
+      authDiv = (
+        <li>
+          {this.props.auth.user.username}
+          <Button onClick={this.onUpdateAuth.bind(this)} children={(<span>Útskrá</span>)}/>
+        </li>
+      )
+    }
+
     return (
       <header className="header">
         <ul>
@@ -26,9 +47,7 @@ class Header extends Component {
               <Button onClick={this.onClick}>Leita</Button>
             </div>
           </li>
-          <li className="login-nav">
-            <Link to="/login">Innskráning</Link>
-          </li>
+          {authDiv}
         </ul>
       </header>
     );
@@ -36,9 +55,11 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-  }
+  return state;
 }
 
-export default connect(mapStateToProps)(Header);
+const mapActionsToProps = {
+  onUpdateAuth: requestLogout,
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(Header);
