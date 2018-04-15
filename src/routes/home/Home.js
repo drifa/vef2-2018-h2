@@ -8,7 +8,9 @@ class Home extends Component {
 
 
   render() {
-    const isLoggedIn = true;
+    console.log(JSON.stringify(this.props));
+    const isLoggedIn = this.props.authenticated;
+    console.log("Authenticated " + isLoggedIn);
     /* todo birta mismunandi upplýsingar ef innskráður notandi eða ekki */
     const loggedInDiv = (
       <div className="home-text">

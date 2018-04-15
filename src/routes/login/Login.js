@@ -39,21 +39,15 @@ class Login extends Component {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(JSON.stringify(data));
-      let error = '';
-      let auth = null;
 
       if (data.error) {
-        error = data.error;
+        let newState = Object.assign({}, this.state);
+        newState.error = data.error;
+        this.setState(newState);
       } else {
-        auth = data;
-        this.onUpdateAuth(auth);
+        this.onUpdateAuth(data);
       }
-      let newState = Object.assign({}, this.state);
-      newState.error = error;
-      newState.auth = auth;
 
-      this.setState(newState)
     });
   }
 
@@ -71,7 +65,7 @@ class Login extends Component {
 
   render() {
 
-    let redirect = (<div></div>)
+    let redirect = (null);
 
     if (this.props.auth.user) {
       redirect = (<Redirect to="/" push />);

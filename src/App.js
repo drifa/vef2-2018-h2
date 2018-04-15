@@ -27,7 +27,7 @@ class App extends Component {
     console.log(this.props);
 
     let authenticated = false;
-    if (this.props.auth.user) authenticated = true;
+    if (this.props.auth.user) { authenticated = true; }
 
     return (
       <main className="main">
@@ -36,7 +36,9 @@ class App extends Component {
         <Header />
         <div className="main__content">
           <Switch location={this.props.location}>
-            <Route path="/" exact component={Home} />
+            <Route path="/" exact render={() => {
+              return (<Home authenticated={authenticated} />)
+            }}/>
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
             <Route path="/books" exact component={BookList} />
