@@ -1,5 +1,7 @@
 .home {
-  margin: 3% 0 0 15%;
+  padding: 2em;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .home h1 {

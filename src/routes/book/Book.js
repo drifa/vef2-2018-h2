@@ -27,6 +27,21 @@ export default class Book extends Component {
       });
   }
 
+  /*handleSubmit(event){
+    event.preventDefault();
+    fetch(`${process.env.REACT_APP_SERVICE_URL}books/${this.props.match.params.id}`, {
+     method: 'patch',
+     headers: {
+       'Content-Type':'application/json',
+       'Authorization': `Bearer ${token}`,
+     },
+     body: {
+      "title": this.state.book.title,
+     }
+    });
+ };*/
+
+
   onClickSave = (e) => {
 
   }
@@ -44,8 +59,7 @@ export default class Book extends Component {
     };
 
     return (
-
-      <div>
+      <div className="book">
         <h2>{this.state.book.title}</h2>
         <p>Eftir {this.state.book.author}</p>
         <p>ISBN13: {this.state.book.isbn13}</p>
@@ -54,12 +68,22 @@ export default class Book extends Component {
         <p>{this.state.book.pagecount} síður</p>
         <p>Gefin út {this.state.book.published}</p>
         <p>Tungumál: {this.state.book.language}</p>
-        <Link to={this.onClick}>Breyta bók</Link>
+        <Link to={`/books/${this.state.book.id}/update`}>Breyta bók</Link>
 
         <div className="rate-book" style={ hidden }>
           <label>Um bók</label>
           <input type="textarea"></input>
-          <input type="number" placeholder="1"></input>
+          <form>
+            <label>Einkunn:</label>
+            <select name="categoryTypes">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </form>
           <div>
             <Button >Vista</Button>
             <Button >Hætta við</Button>

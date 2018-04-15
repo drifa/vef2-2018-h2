@@ -1,5 +1,7 @@
 .signup {
-  margin: 3% 0 0 15%;
+  padding: 2em;
+  padding-left: 10%;
+  padding-right: 10%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
