@@ -14,6 +14,18 @@ class Header extends Component {
   }
 
   render() {
+
+    let authDiv = (
+      <li className="login-nav">
+        <Link to="/login">Innskráning</Link>
+      </li>
+    );
+    if (this.props.auth.user) {
+      authDiv = (
+        <li>{this.props.auth.user.username}</li>
+      )
+    }
+
     return (
       <header className="header">
         <ul>
@@ -26,9 +38,7 @@ class Header extends Component {
               <Button onClick={this.onClick}>Leita</Button>
             </div>
           </li>
-          <li className="login-nav">
-            <Link to="/login">Innskráning</Link>
-          </li>
+          {authDiv}
         </ul>
       </header>
     );
@@ -36,9 +46,7 @@ class Header extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-  }
+  return state;
 }
 
 export default connect(mapStateToProps)(Header);

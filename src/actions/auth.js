@@ -7,14 +7,20 @@
 import api from '../api';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGOUT_REQUEST = 'LOGIN_REQUEST';
 
-function requestLogin() {
+export function requestLogin(auth) {
   return {
     type: LOGIN_REQUEST,
-    isFetching: true,
-    isAuthenticated: false,
-    message: null,
-  }
+    payload: auth,
+  };
+}
+
+export function requestLogout(auth) {
+  return {
+    type: LOGIN_REQUEST,
+    payload: {},
+  };
 }
 
 /* todo fleiri action */

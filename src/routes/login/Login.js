@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Button from '../../components/button';
+
+import { requestLogin } from '../../actions/auth';
 
 /* todo sækja actions frá ./actions */
 
@@ -17,6 +19,11 @@ class Login extends Component {
       error: '',
     }
   }
+
+  onUpdateAuth(auth) {
+     this.props.onUpdateAuth(auth);
+  }
+
 
   loginPressed() {
     fetch(`${process.env.REACT_APP_SERVICE_URL}login`, {
@@ -40,6 +47,7 @@ class Login extends Component {
         error = data.error;
       } else {
         auth = data;
+        this.onUpdateAuth(auth);
       }
       let newState = Object.assign({}, this.state);
       newState.error = error;
@@ -62,8 +70,16 @@ class Login extends Component {
   }
 
   render() {
+
+    let redirect = (<div></div>)
+
+    if (this.props.auth.user) {
+      redirect = (<Redirect to="/" push />);
+    }
+
     return (
       <div className="login">
+        {redirect}
         <div>
           <h2 className="title">Innskráning</h2>
         </div>
@@ -91,6 +107,13 @@ class Login extends Component {
   }
 }
 
-/* todo tengja við redux */
+const mapStateToProps = (state) => {
+  return state;
+}
 
-export default Login;
+const mapActionsToProps = {
+  onUpdateAuth: requestLogin,
+}
+
+/* todo tengja við redux */
+export default connect(mapStateToProps, mapActionsToProps)(Login);
