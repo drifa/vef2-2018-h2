@@ -11,13 +11,25 @@ import './index.css';
 
 import { requestLogin } from './actions/auth';
 
+import { loadState, saveState } from './loadState';
+
 /* verkefni sett upp til að styðja async actions í redux */
 const store = createStore(
   rootReducer,
   applyMiddleware(thunk)
 );
 
-store.dispatch(requestLogin({}))
+store.subscribe(() => {
+  saveState(store.getState());
+});
+
+let initialState = loadState();
+if (initialState && initialState.auth) {
+  store.dispatch(requestLogin(initialState.auth));
+} else {
+  store.dispatch(requestLogin({}));
+}
+
 
 ReactDOM.render(
   <Provider store={store}>
