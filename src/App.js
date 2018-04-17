@@ -24,8 +24,6 @@ import './App.css';
 class App extends Component {
 
   render() {
-    console.log("YES");
-    console.log(this.props);
 
     let authenticated = false;
     if (this.props.auth.user) { authenticated = true; }
