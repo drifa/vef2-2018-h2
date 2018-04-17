@@ -27,21 +27,6 @@ export default class Book extends Component {
       });
   }
 
-  /*handleSubmit(event){
-    event.preventDefault();
-    fetch(`${process.env.REACT_APP_SERVICE_URL}books/${this.props.match.params.id}`, {
-     method: 'patch',
-     headers: {
-       'Content-Type':'application/json',
-       'Authorization': `Bearer ${token}`,
-     },
-     body: {
-      "title": this.state.book.title,
-     }
-    });
- };*/
-
-
   onClickSave = (e) => {
 
   }

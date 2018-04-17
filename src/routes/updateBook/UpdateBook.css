@@ -28,11 +28,6 @@
   padding-bottom: 100px;
 }
 
-.div-textarea {
-  display: flex;
-  flex-direction: row;
-}
-
 .updateBook-description {
   width: 100%;
 }
@@ -40,4 +35,25 @@
 .updateBook-buttons {
   padding-top: 3%;
   padding-bottom: 1em;
+}
+
+.form-categories {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-textarea {
+  margin-top: 1em;
+}
+
+.form-categories select {
+  margin-top: 1em;
+  width: 15%;
 }
