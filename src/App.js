@@ -14,6 +14,9 @@ import NotFound from './routes/not-found';
 import BookList from './routes/bookList';
 import Book from './routes/book';
 import UpdateBook from './routes/updateBook';
+import User from './routes/user';
+import Users from './routes/userList';
+
 
 import { requestLogin } from './actions/auth';
 
@@ -42,8 +45,10 @@ class App extends Component {
             <Route path="/register" exact component={Register} />
             <Route path="/books" exact component={BookList} />
             <Route path="/books/:id" exact component={Book} />
-            <Route path="/books/:id/update" exact component={UpdateBook} />
-            <UserRoute path="/profile" authenticated={authenticated} component={Profile} />
+            <Route path="/books/:id/:update" authenticated={authenticated} component={UpdateBook} />
+            <Route path="/users" exact authenticated={authenticated} component={Users} />
+            <Route path="/users/:id" exact authenticated={authenticated} component={User} />
+            <UserRoute path="/users/me/profile" exact authenticated={authenticated} component={Profile} />
             {/* todo fleiri route */}
             <Route component={NotFound} />
           </Switch>

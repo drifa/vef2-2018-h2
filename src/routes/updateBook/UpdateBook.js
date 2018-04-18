@@ -47,7 +47,7 @@ export default class UpdateBook extends Component {
 
   updateBook() {
     return fetch(`${process.env.REACT_APP_SERVICE_URL}books/${this.props.match.params.id}`, {
-         method: 'patch',
+         method: 'PUT',
          headers: {
            'Content-Type':'application/json',
          },
