@@ -20,13 +20,18 @@ export default class BookListItem extends Component {
       published = `, gefin út ${book.published}`
     }
 
+    let by = '';
+    if (this.props.showOnlyTitle === false) {
+      by = `Eftir ${book.author}${published}`
+    }
+
     return (
       <div>
         <strong>
           <Link to={`/books/${book.id}`}>{book.title}</Link>
         </strong>
         <p>
-          {`Eftir ${book.author}${published}`}
+          {by}
         </p>
       </div>
     );
