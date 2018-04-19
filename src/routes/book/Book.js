@@ -53,7 +53,7 @@ export default class Book extends Component {
         <p>{this.state.book.pagecount} síður</p>
         <p>Gefin út {this.state.book.published}</p>
         <p>Tungumál: {this.state.book.language}</p>
-        <Link to={`/books/${this.state.book.id}/update`}>Breyta bók</Link>
+        <Link to={`/books/${this.state.book.id}/edit`}>Breyta bók</Link>
 
         <div className="rate-book" style={ hidden }>
           <label>Um bók</label>

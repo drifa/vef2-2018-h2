@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect} from 'react-router-dom';
 
 import Button from '../button';
 
@@ -10,6 +10,10 @@ import { requestLogout } from '../../actions/auth';
 import './Header.css';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { redirect: false }
+  }
 
   onClick = (e) => {
     console.log('leita');
@@ -17,9 +21,17 @@ class Header extends Component {
 
   onUpdateAuth() {
     this.props.onUpdateAuth({});
+    this.setState({ redirect: true }, () => {
+      this.setState({ redirect: false });
+    });
   }
 
   render() {
+
+    let redirect = (null);
+    if (this.state.redirect) {
+      redirect = (<Redirect to="/"/>);
+    }
 
     let authDiv = (
       <li className="login-nav">
@@ -37,6 +49,7 @@ class Header extends Component {
 
     return (
       <header className="header">
+        {redirect}
         <ul>
           <li className="heading-nav">
             <h1 className="header__heading"><Link to="/" className="home-link">Bókasafnið</Link></h1>
@@ -47,7 +60,7 @@ class Header extends Component {
               <Button onClick={this.onClick}>Leita</Button>
             </div>
           </li>
-          {authDiv}
+          <Link to="/users/me">{authDiv}</Link>
         </ul>
       </header>
     );

@@ -15,7 +15,8 @@ import BookList from './routes/bookList';
 import Book from './routes/book';
 import UpdateBook from './routes/updateBook';
 import User from './routes/user';
-import Users from './routes/userList';
+import UsersList from './routes/usersList';
+import NewBook from './routes/newBook';
 
 
 import { requestLogin } from './actions/auth';
@@ -44,9 +45,10 @@ class App extends Component {
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
             <Route path="/books" exact component={BookList} />
-            <Route path="/books/:id" exact component={Book} />
-            <Route path="/books/:id/:update" authenticated={authenticated} component={UpdateBook} />
-            <Route path="/users" exact authenticated={authenticated} component={Users} />
+            <Route path="/books/new" exact authenticated={authenticated} component={NewBook} />
+            <Route path="/books/:id/edit" authenticated={authenticated} component={UpdateBook} />
+            <Route path="/books/:id" component={Book} />
+            <Route path="/users" exact authenticated={authenticated} component={UsersList} />
             <Route path="/users/:id" exact authenticated={authenticated} component={User} />
             <UserRoute path="/users/me/profile" exact authenticated={authenticated} component={Profile} />
             {/* todo fleiri route */}

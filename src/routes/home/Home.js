@@ -15,7 +15,7 @@ class Home extends Component {
     const loggedInDiv = (
       <div className="home-text">
         <p>
-          Þú ert skráður notandi og getur því <Link to='/#'>skráð bækur</Link>
+          Þú ert skráður notandi og getur því <Link to='/books/new'>skráð bækur</Link>
           og <Link to='/books'>breytt þeim sem til eru</Link>.
         </p>
         <p>
