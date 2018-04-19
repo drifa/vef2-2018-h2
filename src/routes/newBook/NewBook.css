@@ -1,0 +1,59 @@
+.newBook {
+  padding: 2em;
+  padding-left: 10%;
+  padding-right: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.table-newBook {
+  width: 50%;
+}
+
+.table-newBook td {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.table-text{
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.table-textarea {
+  width: 70%;
+  padding-top: 5px;
+  padding-bottom: 100px;
+}
+
+.newBook-description {
+  width: 100%;
+}
+
+.newBook-buttons {
+  padding-top: 3%;
+  padding-bottom: 1em;
+}
+
+.form-categories {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.textarea-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-textarea {
+  margin-top: 1em;
+}
+
+.form-categories select {
+  margin-top: 1em;
+  width: 15%;
+}

@@ -10,12 +10,9 @@ import { requestLogout } from '../../actions/auth';
 import './Header.css';
 
 class Header extends Component {
-  constructor() {
-    super();
-    this.state = {
-      redirect: (null),
-      query: '',
-    };
+  constructor(props) {
+    super(props);
+    this.state = { redirect: false }
   }
 
   onClick(e) {
@@ -30,6 +27,9 @@ class Header extends Component {
 
   onUpdateAuth() {
     this.props.onUpdateAuth({});
+    this.setState({ redirect: true }, () => {
+      this.setState({ redirect: false });
+    });
   }
 
   updateQuery(evt) {
@@ -39,6 +39,11 @@ class Header extends Component {
   }
 
   render() {
+
+    let redirect = (null);
+    if (this.state.redirect) {
+      redirect = (<Redirect to="/"/>);
+    }
 
     let authDiv = (
       <li className="login-nav">
@@ -56,7 +61,7 @@ class Header extends Component {
 
     return (
       <header className="header">
-        {this.state.redirect}
+        {redirect}
         <ul>
           <li className="heading-nav">
             <h1 className="header__heading"><Link to="/" className="home-link">Bókasafnið</Link></h1>
@@ -67,7 +72,7 @@ class Header extends Component {
               <Button onClick={this.onClick.bind(this)}>Leita</Button>
             </div>
           </li>
-          {authDiv}
+          <Link to="/users/me">{authDiv}</Link>
         </ul>
       </header>
     );

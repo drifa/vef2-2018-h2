@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
-import './UpdateBook.css';
+import './NewBook.css';
 import Button from '../../components/button';
 
 /* todo aðrar útgáfur af takka fyrir disabled, minni takka fyrir logout og "warning" takka */
 
-export class UpdateBook extends Component {
+export class NewBook extends Component {
 
   constructor() {
     super();
@@ -18,7 +18,7 @@ export class UpdateBook extends Component {
       title: '',
       author: '',
       description: '',
-      category: '',
+      category: 1,
       isbn10: '',
       isbn13: '',
       published: '',
@@ -35,7 +35,7 @@ export class UpdateBook extends Component {
     fetch(`${process.env.REACT_APP_SERVICE_URL}categories`)
       .then(res => res.json())
       .then(data => {
-        fetch(`${process.env.REACT_APP_SERVICE_URL}books/${this.props.match.params.id}`)
+        fetch(`${process.env.REACT_APP_SERVICE_URL}books`)
           .then(res => res.json())
           .then(fetchedBook => {
             const newState = Object.assign({}, this.state);
@@ -46,9 +46,9 @@ export class UpdateBook extends Component {
       });
   }
 
-  updateBook() {
-    return fetch(`${process.env.REACT_APP_SERVICE_URL}books/${this.props.match.params.id}`, {
-         method: 'PUT',
+  newBook() {
+    return fetch(`${process.env.REACT_APP_SERVICE_URL}books`, {
+         method: 'POST',
          headers: {
            'Content-Type':'application/json',
            'Authorization': `Bearer ${this.props.auth.token}`,
@@ -71,55 +71,65 @@ export class UpdateBook extends Component {
        })
   }
 
-  updateBookTitle(evt) {
+  newBookTitle(evt) {
     let newState = Object.assign({}, this.state);
     newState.title = evt.target.value;
     this.setState(newState);
   }
 
-  updateBookAuthor(evt) {
+  newBookAuthor(evt) {
     let newState = Object.assign({}, this.state);
     newState.author = evt.target.value;
     this.setState(newState);
   }
 
-  updateBookDescription(evt) {
+  newBookDescription(evt) {
     let newState = Object.assign({}, this.state);
     newState.description = evt.target.value;
     this.setState(newState);
   }
 
-  updateBookCategory(evt) {
+  newBookCategory(evt) {
     let newState = Object.assign({}, this.state);
-    newState.category = evt.target.value;
+    let categoryFound = this.state.categories
+      .find(cat => {
+        return cat.title === evt.target.value
+      });
+    console.log("CATEGORY: ");
+    console.log(categoryFound);
+    if (categoryFound) {
+      console.log("CATEGORY: " + categoryFound.id);
+      newState.category = categoryFound.id;
+    }
+
     this.setState(newState);
   }
 
-  updateBookISBN10(evt) {
+  newBookISBN10(evt) {
     let newState = Object.assign({}, this.state);
     newState.isbn10 = evt.target.value;
     this.setState(newState);
   }
 
-  updateBookISBN13(evt) {
+  newBookISBN13(evt) {
     let newState = Object.assign({}, this.state);
     newState.isbn13 = evt.target.value;
     this.setState(newState);
   }
 
-  updateBookPublished(evt) {
+  newBookPublished(evt) {
     let newState = Object.assign({}, this.state);
     newState.published = evt.target.value;
     this.setState(newState);
   }
 
-  updateBookPageCount(evt) {
+  newBookPageCount(evt) {
     let newState = Object.assign({}, this.state);
     newState.pagecount = evt.target.value;
     this.setState(newState);
   }
 
-  updateBookLanguage(evt) {
+  newBookLanguage(evt) {
     let newState = Object.assign({}, this.state);
     newState.language = evt.target.value;
     this.setState(newState);
@@ -135,22 +145,23 @@ export class UpdateBook extends Component {
       .map(title => (
         <option key={title} value={title}>{title}</option>
       ))
-    return (
-      <div className="updateBook">
-        <h1>Breyta bók</h1>
 
-        <table className="table-updateBook">
+    return (
+      <div className="newBook">
+        <h1>Skrá nýja bók</h1>
+
+        <table className="table-newBook">
           <tbody>
             <tr>
               <td><label>Titill:</label></td>
-              <td className="table-input-update">
-                <input className="table-text" type="text" onChange={this.updateBookTitle.bind(this)} placeholder={this.state.book.title}></input>
+              <td className="table-input-new">
+                <input className="table-text" type="text" onChange={this.newBookTitle.bind(this)}></input>
               </td>
             </tr>
             <tr>
               <td><label>Höfundur:</label></td>
-              <td className="table-input-update">
-                <input className="table-text" type="text" onChange={this.updateBookAuthor.bind(this)} placeholder={this.state.book.author}></input>
+              <td className="table-input-new">
+                <input className="table-text" type="text" onChange={this.newBookAuthor.bind(this)}></input>
               </td>
             </tr>
           </tbody>
@@ -158,55 +169,57 @@ export class UpdateBook extends Component {
 
         <div className="textarea-description">
           <label>Lýsing:</label>
-          <textarea className="table-textarea" onChange={this.updateBookDescription.bind(this)} placeholder={this.state.book.description}></textarea>
+          <textarea className="table-textarea" onChange={this.newBookDescription.bind(this)}></textarea>
         </div>
 
         <form className="form-categories">
           <label>Flokkur:</label>
-          <select onChange={this.updateBookCategory.bind(this)} name="categoryTypes">
+          <select onChange={this.newBookCategory.bind(this)} name="categoryTypes">
             {titles}
           </select>
         </form>
 
-        <table className="table-updateBook">
+        <table className="table-newBook">
           <tbody>
             <tr>
               <td><label>ISBN10:</label></td>
-              <td className="table-input-update">
-                <input className="table-text" type="text" onChange={this.updateBookISBN10.bind(this)} placeholder={this.state.book.isbn10}></input>
+              <td className="table-input-new">
+                <input className="table-text" type="text" onChange={this.newBookISBN10.bind(this)}></input>
               </td>
             </tr>
             <tr>
               <td><label>ISBN13:</label></td>
-              <td className="table-input-update">
-                <input className="table-text" type="text" onChange={this.updateBookISBN13.bind(this)} placeholder={this.state.book.isbn13}></input>
+              <td className="table-input-new">
+                <input className="table-text" type="text" onChange={this.newBookISBN13.bind(this)}></input>
               </td>
             </tr>
             <tr>
               <td><label>Útgefin:</label></td>
-              <td className="table-input-update">
-                <input className="table-text" type="text" onChange={this.updateBookPublished.bind(this)} placeholder={this.state.book.published}></input>
+              <td className="table-input-new">
+                <input className="table-text" type="text" onChange={this.newBookPublished.bind(this)}></input>
               </td>
             </tr>
             <tr>
               <td><label>Fjöldi síða:</label></td>
-              <td className="table-input-update">
-                <input className="table-text" type="text" onChange={this.updateBookPageCount.bind(this)} placeholder={this.state.book.pagecount}></input>
+              <td className="table-input-new">
+                <input className="table-text" type="text" onChange={this.newBookPageCount.bind(this)}></input>
               </td>
             </tr>
             <tr>
               <td><label>Tungumál:</label></td>
-              <td className="table-input-update">
-                <input className="table-text" type="text" onChange={this.updateBookLanguage.bind(this)} placeholder={this.state.book.language}></input>
+              <td className="table-input-new">
+                <input className="table-text" type="text" onChange={this.newBookLanguage.bind(this)}></input>
               </td>
             </tr>
           </tbody>
         </table>
 
-        <div className="updateBook-buttons">
-          <Button onClick={this.updateBook.bind(this)}>Vista</Button>
+        <div className="newBook-buttons">
+          <Button onClick={this.newBook.bind(this)}>
+            Vista
+          </Button>
         </div>
-        <div className="updateBook-buttons">
+        <div className="newBook-buttons">
           <Button onClick={this.goBack}>Til baka</Button>
         </div>
       </div>
@@ -219,4 +232,4 @@ const mapStateToProps = (state) => {
   return state;
 }
 
-export default connect(mapStateToProps)(UpdateBook);
+export default connect(mapStateToProps)(NewBook);

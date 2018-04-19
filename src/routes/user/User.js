@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 
 import Button from '../../components/button';
 import BookListItem from '../../components/bookListItem';
@@ -15,6 +15,7 @@ export class User extends Component {
 
     this.state = {
       books: [],
+      user: {},
     };
   }
 
@@ -51,17 +52,39 @@ export class User extends Component {
         });
       Promise.all(bookReviewsTemp)
         .then(bookReviews => {
-          this.setState({
-            books: bookReviews,
-          });
+          let newState = Object.assign({}, this.state);
+          newState.books = bookReviews;
+          this.setState(newState);
         })
     });
+
+
+    fetch(`${process.env.REACT_APP_SERVICE_URL}users/${this.props.match.params.id}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${this.props.auth.token}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        let newState = Object.assign({}, this.state);
+        newState.user = data;
+        this.setState(newState);
+      });
   }
 
   render () {
+    let userdiv = (null);
+    if (this.state.user.username) {
+      userdiv = (
+        <div>{this.state.user.username}</div>
+      )
+    }
     return (
       <div>
         <h1>Halló user síða</h1>
+
+        {userdiv}
         <ul>
           {this.state.books}
         </ul>
