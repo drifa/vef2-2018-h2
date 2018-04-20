@@ -31,7 +31,7 @@ export class User extends Component {
 
     }
 
-    fetch(`${process.env.REACT_APP_SERVICE_URL}users/me/read`, {
+    fetch(`${process.env.REACT_APP_SERVICE_URL}users/${this.props.match.params.id}/read`, {
       headers: {
         "Authorization": `Bearer ${this.props.auth.token}`,
       },
@@ -44,8 +44,10 @@ export class User extends Component {
           const description = `Einkunn: ${review.rating}, ${review.review}`;
           return (
             <li key={review.id}>
-              <Link to={`/books/${book.id}`}>{book.title}</Link>
-              <p>{description}</p>
+              <div>
+                <Link to={`/books/${book.id}`}><strong>{book.title}</strong></Link>
+                <p>{description}</p>
+              </div>
             </li>
           )
 
@@ -74,18 +76,18 @@ export class User extends Component {
   }
 
   render () {
-    let userdiv = (null);
+    let user = (null);
     if (this.state.user.username) {
-      userdiv = (
-        <div>{this.state.user.username}</div>
+      user = (
+        <h2>{this.state.user.username}</h2>
       )
     }
-    return (
-      <div>
-        <h1>Halló user síða</h1>
 
-        {userdiv}
-        <ul>
+    return (
+      <div className="userDiv">
+        {user}
+        <h3>Lesnar bækur</h3>
+        <ul className="list">
           {this.state.books}
         </ul>
       </div>

@@ -1,0 +1,22 @@
+h2 {
+  margin-bottom: 1em;
+}
+.userDiv {
+  padding: 2em;
+}
+
+.list {
+  list-style-position: inside;
+}
+
+.list li div {
+  display: inline;
+}
+
+.list li div p {
+  margin-left: 2em
+}
+
+.list li div a {
+  margin-left: 0.7em;
+}
