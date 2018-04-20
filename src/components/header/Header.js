@@ -42,7 +42,7 @@ class Header extends Component {
 
     let redirect = (null);
     if (this.state.redirect) {
-      redirect = (<Redirect to="/"/>);
+      redirect = this.state.redirect;
     }
 
     let authDiv = (
